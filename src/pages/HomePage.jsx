@@ -21,43 +21,37 @@ class HomePage extends React.Component {
 
 
     componentDidMount() {
-        this.getProduct()
-        // this.props.productAction()
+        this.props.productAction()
     }
 
-    getProduct = () => {
-       axios.get(`${API_URL}`)
-       .then((response) => {
-        console.log("product", response.data)
-        this.setState({productList: response.data})
-       }).catch((error) => {
-        console.log(error)
-       })
-
-    }
 
     printProduct = () => {
         return this.props.productList.products.map((value, index) => {
-            return <div className='col-3 mt-1'>
+            return <div className='col-3 mt-1' key={value.id}>
                 <Card className='shadow p-2 mb-3 bg-white' style={{ width: "96vw", marginLeft: 23 }}>
-                    <Card className='shadow bg-white' style={{width: 420}}>
-                        
-                        <CardImg
-                            src={value.thumbnail}
-                            top width="30%"
-                            alt={`${value.title}-${index}`}
-                            style={{ width: 400 }}
-                        />
-                        
-                    </Card>
-                    <CardBody>
-                        <div>
-                            <p>{value.title}</p>
-                            <p>{value.brand}</p>
-                            <p>{value.price}</p>
-                            <p>{value.discount}</p>
-                        </div>
-                    </CardBody>
+                    <div className='row'>
+                        <Card className='shadow bg-white col-2' style={{ width: 420, marginLeft: 20 }} >
+                            <Link to={`/product-detail?id=${value.id}`} style={{ textDecoration: "none", color: "black", fontWeight: "bolder" }}>
+                                <CardImg
+                                    src={value.thumbnail}
+                                    top width="20%"
+                                    alt={`${value.title}-${index}`}
+                                    style={{ width: 400, marginTop: 2, paddingRight: 6 }}
+                                />
+                            </Link>
+                        </Card>
+                        <CardBody className='col-2' style={{marginLeft: 25}}>
+                            <div style={{ textAlign: "left" }}>
+                                <h3>{value.title}</h3>
+           
+                                <h3>{value.price}</h3>
+                                <div className='row ' style={{display: "flex", marginTop: 80}}>
+                                    <h3 className='col'>{value.rating}</h3>
+                                    <h3 className='col'>{value.discountPercentage}</h3>
+                                </div>
+                            </div>
+                        </CardBody>
+                    </div>
                 </Card>
 
             </div>
@@ -71,7 +65,6 @@ class HomePage extends React.Component {
                 <div>
                     {this.printProduct()}
                 </div>
-
             </div>
         );
     }

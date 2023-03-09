@@ -19,7 +19,7 @@ class App extends React.Component {
       <div className='App'>
         <Routes>
         <Route path='/' element={<HomePage/>} />
-        {/* <Route path='/product-detail' element={<ProductDetail/>} /> */}
+        <Route path='/product-detail' element={<ProductDetail/>} />
         </Routes>
       </div>
      );
