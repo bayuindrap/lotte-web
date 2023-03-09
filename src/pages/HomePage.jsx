@@ -31,7 +31,7 @@ class HomePage extends React.Component {
                 <Card className='shadow p-2 mb-3 bg-white' style={{ width: "96vw", marginLeft: 23 }}>
                     <div className='row'>
                         <Card className='shadow bg-white col-2' style={{ width: 420, marginLeft: 20 }} >
-                            <Link to={`/product-detail?id=${value.id}`} style={{ textDecoration: "none", color: "black", fontWeight: "bolder" }}>
+                            <Link to={`/product-detail/${value.id}`} style={{ textDecoration: "none", color: "black", fontWeight: "bolder" }}>
                                 <CardImg
                                     src={value.thumbnail}
                                     top width="20%"

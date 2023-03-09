@@ -2,8 +2,12 @@ import axios from 'axios';
 import React from 'react';
 import { Card, CardImg, CardBody } from 'reactstrap';
 import { API_URL } from '../helper';
+import { useParams } from 'react-router-dom';
 
 
+function withParams(Component) {
+ return props => <Component {...props} params={useParams()}/>
+}
 
 class ProductDetail extends React.Component {
     constructor(props) {
@@ -13,17 +17,19 @@ class ProductDetail extends React.Component {
         }
     }
 
-    componentDidMount() {
-        console.log("CEK URL DETAIL PAGE:", window.location)
-        axios.get(`${API_URL}${window.location.search}`)
-            .then((response) => {
-                console.log("detail", response.data.products[0])
-                this.setState({ detail: response.data.products[0] })
-            }).catch((error) => {
-                console.log(error)
-            })
+    componentDidMount () {
+        let {id} = this.props.params
+        console.log(id)
+        axios.get(`${API_URL}/${id}`)
+        .then((res) => {
+            console.log(res.data)
+            this.setState({ detail: res.data})
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 
+    
     printDetail = () => {
         return (
         <div>
@@ -70,4 +76,4 @@ class ProductDetail extends React.Component {
     }
 }
 
-export default ProductDetail;
+export default withParams (ProductDetail);
