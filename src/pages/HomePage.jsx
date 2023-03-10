@@ -26,7 +26,7 @@ class HomePage extends React.Component {
 
 
     printProduct = () => {
-        return this.props.productList.products.map((value, index) => {
+        return this?.props?.productList?.products?.map((value, index) => {
             return <div className='col-3 mt-1' key={value.id}>
                 <Card className='shadow p-2 mb-3 bg-white' style={{ width: "96vw", marginLeft: 23 }}>
                     <div className='row'>
